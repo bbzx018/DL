@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>คำร้องขอโอนย้ายสาขาวิชาต่างคณะ</title>
+<style>
+/* navigation buttons */
+.navbar {
+  max-width: 800px;
+  margin: 18px auto;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.nav-btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  background: #10b981;
+  color: white;
+  transition: transform .15s ease, background .15s ease;
+}
+.nav-btn:hover {
+  transform: translateY(-3px);
+  background: #059669;
+}
+.nav-btn.secondary {
+  background: #06b6d4; /* alternative color */
+}
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0fdf4; /* green-50 */
+    color: #14532d; /* green-900 */
+  }
+  h2 {
+    text-align: center;
+    color: #166534; /* green-800 */
+    margin-bottom: 20px;
+  }
+  form {
+    background-color: #ffffff;
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.4s ease-in-out;
+  }
+  label {
+    display: block;
+    margin-top: 18px;
+    font-weight: 600;
+    color: #166534;
+  }
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #d1fae5; /* green-100 */
+    border-radius: 12px;
+    background-color: #ecfdf5; /* green-50 */
+    box-sizing: border-box;
+    transition: 0.25s ease;
+    font-size: 15px;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #10b981; /* emerald-500 */
+    outline: none;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+    background-color: #ffffff;
+  }
+  .inline {
+    display: inline-block;
+    margin-right: 15px;
+    margin-top: 8px;
+  }
+  input[type="radio"] {
+    margin-right: 5px;
+  }
+  .btn-container {
+    display: flex;
+    gap: 4%;
+    margin-top: 25px;
+  }
+  button {
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    flex: 1;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .btn-submit {
+    background-color: #10b981;
+  }
+  .btn-submit:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+  }
+  .btn-reset {
+    background-color: #f43f5e;
+  }
+  .btn-reset:hover {
+    background-color: #e11d48;
+    transform: translateY(-2px);
+  }
+  .error {
+    color: #dc2626;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  @media (max-width: 600px) {
+    .btn-container {
+      flex-direction: column;
+    }
+    button {
+      width: 100%;
+    }
+  }
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <a class="nav-btn" href="activity-booking.html">ฟอร์มจองกิจกรรม</a>
+  <a class="nav-btn" href="health_form.html">แบบสอบถามสุขภาพ</a>
+</div>
+
+
+<h2>คำร้องขอโอนย้ายสาขาวิชาต่างคณะ</h2>
+
+<form id="transferForm" novalidate>
+  <label>วันที่เขียนคำร้อง
+    <input type="date" id="date" required />
+    <div class="error" id="err-date"></div>
+  </label>
+
+  <label>เรียน (คณะใหม่)
+    <input type="text" id="newFaculty" placeholder="เช่น คณะวิทยาศาสตร์" required />
+    <div class="error" id="err-newFaculty"></div>
+  </label>
+
+  <label>คำนำหน้า
+    <span class="inline"><input type="radio" name="prefix" value="นาย" required /> นาย</span>
+    <span class="inline"><input type="radio" name="prefix" value="นาง" /> นาง</span>
+    <span class="inline"><input type="radio" name="prefix" value="นางสาว" /> นางสาว</span>
+    <div class="error" id="err-prefix"></div>
+  </label>
+
+  <label>ชื่อ-นามสกุล
+    <input type="text" id="fullName" placeholder="สมชาย ใจดี" required />
+    <div class="error" id="err-fullName"></div>
+  </label>
+
+  <label>รหัสนักศึกษา
+    <input type="text" id="studentID" maxlength="10" placeholder="6512345678" required />
+    <div class="error" id="err-studentID"></div>
+  </label>
+
+  <label>โทรศัพท์มือถือ (รูปแบบ 08x-xxx-xxxx)
+    <input type="text" id="phone" placeholder="081-234-5678" required />
+    <div class="error" id="err-phone"></div>
+  </label>
+
+  <label>หลักสูตร
+    <select id="course" required>
+      <option value="">-- กรุณาเลือก --</option>
+      <option value="4-5 ปี">4 - 5 ปี</option>
+      <option value="4 ปีเทียบเข้าเรียน (2 ปี)">4 ปีเทียบเข้าเรียน (2 ปี)</option>
+    </select>
+    <div class="error" id="err-course"></div>
+  </label>
+
+  <label>ภาคการศึกษา
+    <span class="inline"><input type="radio" name="semester" value="ปกติ" required /> ปกติ</span>
+    <span class="inline"><input type="radio" name="semester" value="สมทบ" /> สมทบ</span>
+    <div class="error" id="err-semester"></div>
+  </label>
+
+  <label>สาขาวิชาเดิม
+    <input type="text" id="oldMajor" placeholder="เช่น วิทยาการคอมพิวเตอร์" required />
+    <div class="error" id="err-oldMajor"></div>
+  </label>
+
+  <label>คณะเดิม
+    <input type="text" id="oldFaculty" placeholder="เช่น คณะวิทยาศาสตร์" required />
+    <div class="error" id="err-oldFaculty"></div>
+  </label>
+
+  <label>สาขาวิชาที่ต้องการย้ายเข้า
+    <input type="text" id="newMajor" placeholder="เช่น เทคโนโลยีสารสนเทศ" required />
+    <div class="error" id="err-newMajor"></div>
+  </label>
+
+  <label>เหตุผลที่ขอโอนย้าย
+    <textarea id="reason" rows="4" placeholder="อธิบายเหตุผลอย่างน้อย 20 ตัวอักษร" required></textarea>
+    <div class="error" id="err-reason"></div>
+  </label>
+
+  <label>วันที่ยื่นคำร้อง
+    <input type="date" id="submitDate" required />
+    <div class="error" id="err-submitDate"></div>
+  </label>
+
+  <label>ลงชื่อ
+    <input type="text" id="signature" placeholder="นักศึกษา" required />
+    <div class="error" id="err-signature"></div>
+  </label>
+
+  <div class="btn-container">
+    <button type="submit" class="btn-submit">ส่งคำร้อง</button>
+    <button type="reset" class="btn-reset">ล้างข้อมูล</button>
+  </div>
+</form>
+
+<script>
+document.getElementById('transferForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  let valid = true;
+
+  const showError = (id, msg) => {
+    document.getElementById(id).textContent = msg;
+    if (msg) valid = false;
+  };
+
+  const getValue = id => document.getElementById(id)?.value.trim();
+
+  showError('err-date', !getValue('date') ? 'กรุณาเลือกวันที่' : '');
+  showError('err-newFaculty', !getValue('newFaculty') ? 'กรุณากรอกคณะใหม่' : '');
+  showError('err-prefix', document.querySelector('input[name="prefix"]:checked') ? '' : 'กรุณาเลือกคำนำหน้า');
+  showError('err-fullName', !getValue('fullName') ? 'กรุณากรอกชื่อ-นามสกุล' : '');
+  
+  const studentIDPattern = /^\d{10}$/;
+  showError('err-studentID', !studentIDPattern.test(getValue('studentID')) ? 'รหัสนักศึกษาต้องเป็นตัวเลข 10 หลัก' : '');
+  
+  const phonePattern = /^08\d-\d{3}-\d{4}$/;
+  showError('err-phone', !phonePattern.test(getValue('phone')) ? 'เบอร์โทรต้องเป็นรูปแบบ 08x-xxx-xxxx' : '');
+  
+  showError('err-course', !getValue('course') ? 'กรุณาเลือกหลักสูตร' : '');
+  showError('err-semester', document.querySelector('input[name="semester"]:checked') ? '' : 'กรุณาเลือกภาคการศึกษา');
+  showError('err-oldMajor', !getValue('oldMajor') ? 'กรุณากรอกสาขาวิชาเดิม' : '');
+  showError('err-oldFaculty', !getValue('oldFaculty') ? 'กรุณากรอกคณะเดิม' : '');
+  showError('err-newMajor', !getValue('newMajor') ? 'กรุณากรอกสาขาที่ต้องการย้าย' : '');
+  showError('err-reason', getValue('reason').length < 20 ? 'เหตุผลต้องมีอย่างน้อย 20 ตัวอักษร' : '');
+  showError('err-submitDate', !getValue('submitDate') ? 'กรุณาเลือกวันที่ยื่นคำร้อง' : '');
+  showError('err-signature', !getValue('signature') ? 'กรุณาลงชื่อ' : '');
+
+  if (valid) {
+    alert('ส่งคำร้องสำเร็จ!');
+    this.reset();
+  }
+});
+</script>
+
+</body>
+</html>
